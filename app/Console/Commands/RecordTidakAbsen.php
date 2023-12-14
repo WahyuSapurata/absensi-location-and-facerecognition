@@ -16,7 +16,7 @@ class RecordTidakAbsen extends Command
      *
      * @var string
      */
-    protected $signature = 'app:record-tidak-absen';
+    protected $signature = 'absen:record-tidak-absen';
 
     /**
      * The console command description.
@@ -50,7 +50,7 @@ class RecordTidakAbsen extends Command
         $jamAbsenPulangAkhir = $jamPulangAkhir;
 
         // Ambil semua pengguna
-        $users = User::all();
+        $users = User::where('role', '!=', 'admin')->get();
 
         foreach ($users as $user) {
             // Cek apakah user sudah absen sakit atau izin pada hari itu
@@ -69,13 +69,15 @@ class RecordTidakAbsen extends Command
 
                 if (!$absenMasuk) {
                     // Cek waktu absen masuk
-                    $waktuAbsenMasuk = Carbon::now();
-                    if ($waktuAbsenMasuk->isBetween($jamAbsenMasukAwal, $jamAbsenMasukAkhir)) {
-                        Absen::create([
+                    $waktuAbsenMasuk = Carbon::now()->format('H:i');
+
+                    if ($waktuAbsenMasuk > $jamAbsenMasukAkhir) {
+                        Absen::firstOrNew([
                             'uuid_user' => $user->uuid,
                             'jenis_absen' => 'tidak ceklok masuk',
                             'tanggal_absen' => $tanggalAbsen,
-                        ]);
+                        ])->save();
+
                         Log::info("User {$user->name} tidak ceklok masuk pada {$tanggalAbsen}.");
                     }
                 }
@@ -89,20 +91,20 @@ class RecordTidakAbsen extends Command
 
                 if (!$absenPulang) {
                     // Cek waktu absen pulang
-                    $waktuAbsenPulang = Carbon::now();
-                    if ($waktuAbsenPulang->isBetween($jamAbsenPulangAwal, $jamAbsenPulangAkhir)) {
-                        Absen::create([
+                    $waktuAbsenPulang = Carbon::now()->format('H:i');
+
+                    if ($waktuAbsenPulang > $jamAbsenPulangAkhir) {
+                        Absen::firstOrNew([
                             'uuid_user' => $user->uuid,
                             'jenis_absen' => 'tidak ceklok pulang',
                             'tanggal_absen' => $tanggalAbsen,
-                        ]);
+                        ])->save();
+
                         Log::info("User {$user->name} tidak ceklok pulang pada {$tanggalAbsen}.");
                     }
                 }
             }
         }
-
-
         $this->info('Ketidakabsenan berhasil dicatat.');
         Log::info('Ketidakabsenan berhasil dicatat.');
     }

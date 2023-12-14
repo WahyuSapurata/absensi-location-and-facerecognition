@@ -19,6 +19,24 @@ class AbsenController extends BaseController
 
     public function get_absensi()
     {
+        // $tanggalAbsen = now()->format('d-m-Y');
+        // $users = User::where('role', '!=', 'admin')->get();
+
+        // foreach ($users as $user) {
+        //     $absenMasuk = Absen::where([
+        //         'uuid_user' => $user->uuid,
+        //         'jenis_absen' => 'masuk',
+        //         'tanggal_absen' => $tanggalAbsen,
+        //     ])->first();
+
+        //     // Tambahkan pengecekan apakah data absen masuk ditemukan atau tidak
+        //     if ($absenMasuk) {
+        //         dd($absenMasuk);
+        //     } else {
+        //         dd("Absen masuk tidak ditemukan untuk user {$user->name} pada tanggal {$tanggalAbsen}");
+        //     }
+        // }
+
         $module = 'Absensi';
         return view('admin.absensi.index', compact('module'));
     }
