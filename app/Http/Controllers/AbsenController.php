@@ -84,6 +84,14 @@ class AbsenController extends BaseController
     public function absensi(Request $request)
     {
         $data = array();
+
+        $newFoto = '';
+        if ($request->file('foto_absen')) {
+            $extension = $request->file('foto_absen')->extension();
+            $newFoto = auth()->user()->name . '-' . now()->timestamp . '.' . $extension;
+            $request->file('foto_absen')->storeAs('absen', $newFoto);
+        }
+
         try {
             $data = new Absen();
             $data->uuid_user = auth()->user()->uuid;
@@ -93,13 +101,7 @@ class AbsenController extends BaseController
             $data->status = 'telah absen ' . $request->jenis_absen;
             $data->jenis_absen = $request->jenis_absen;
             $data->ket = $request->ket;
-
-            if ($request->hasFile('foto_absen')) {
-                $foto = $request->file('foto_absen');
-                $fotoName = time() . '.' . $foto->getClientOriginalExtension();
-                $foto->storeAs('absen', $fotoName, 'public'); // Simpan file ke direktori 'public/images'
-                $data->foto_absen = $fotoName;
-            }
+            $data->foto_absen = $newFoto;
 
             $data->save();
         } catch (\Exception $e) {

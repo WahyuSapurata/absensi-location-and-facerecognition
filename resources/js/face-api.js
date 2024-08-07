@@ -207,7 +207,7 @@ $(document).ready(async function () {
 
             if (res.success === true) {
                 // Contoh menambahkan wajah pengguna yang sedang diotentikasi
-                addKnownFace(res.data.name, '/storage/foto/' + res.data.foto);
+                addKnownFace(res.data.name, '/foto/' + res.data.foto);
             } else {
                 console.error('Gagal mengambil data:', res.message);
             }

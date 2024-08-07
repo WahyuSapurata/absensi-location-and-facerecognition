@@ -8,6 +8,7 @@ use App\Models\DataGuru;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class DataGuruController extends BaseController
 {
@@ -29,6 +30,14 @@ class DataGuruController extends BaseController
     public function store(StoreDataGuruRequest $storeDataGuruRequest)
     {
         $data = array();
+
+        $newFoto = '';
+        if ($storeDataGuruRequest->file('foto')) {
+            $extension = $storeDataGuruRequest->file('foto')->extension();
+            $newFoto = $storeDataGuruRequest->name . '-' . now()->timestamp . '.' . $extension;
+            $storeDataGuruRequest->file('foto')->storeAs('foto', $newFoto);
+        }
+
         try {
             $data = new User();
             $data->name = $storeDataGuruRequest->name;
@@ -38,13 +47,7 @@ class DataGuruController extends BaseController
             $data->email = $storeDataGuruRequest->email;
             $data->password = Hash::make('<>password');
             $data->role = 'guru';
-
-            if ($storeDataGuruRequest->hasFile('foto')) {
-                $foto = $storeDataGuruRequest->file('foto');
-                $fotoName = time() . '.' . $foto->getClientOriginalExtension();
-                $foto->storeAs('foto', $fotoName, 'public'); // Simpan file ke direktori 'public/images'
-                $data->foto = $fotoName;
-            }
+            $data->foto = $newFoto;
 
             $data->save();
         } catch (\Exception $e) {
@@ -66,26 +69,29 @@ class DataGuruController extends BaseController
 
     public function update(UpdateDataGuruRequest $updateDataGuruRequest, $params)
     {
+        $data = User::where('uuid', $params)->first();
+
+        $oldFotoPath = public_path('foto/' . $data->foto);
+
+        $newFoto = '';
+        if ($updateDataGuruRequest->file('foto')) {
+            $$extension = $storeDataGuruRequest->file('foto')->extension();
+            $newFoto = $storeDataGuruRequest->name . '-' . now()->timestamp . '.' . $extension;
+            $storeDataGuruRequest->file('foto')->storeAs('foto', $newFoto);
+
+            // Hapus foto lama jika ada
+            if (File::exists($oldFotoPath)) {
+                File::delete($oldFotoPath);
+            }
+        }
         try {
-            $data = User::where('uuid', $params)->first();
             $data->name = $updateDataGuruRequest->name;
             $data->nip = $updateDataGuruRequest->nip;
             $data->unit = $updateDataGuruRequest->unit;
 
             $data->email = $updateDataGuruRequest->email;
             $data->password = $updateDataGuruRequest->password ? $updateDataGuruRequest->password : $data->password;
-
-            if ($updateDataGuruRequest->hasFile('foto')) {
-                // Hapus file yang lama sebelum menyimpan yang baru
-                if ($data->foto) {
-                    Storage::disk('public')->delete('foto/' . $data->foto);
-                }
-
-                $foto = $updateDataGuruRequest->file('foto');
-                $fotoName = time() . '.' . $foto->getClientOriginalExtension();
-                $foto->storeAs('foto', $fotoName, 'public'); // Simpan foto ke direktori 'public/foto'
-                $data->foto = $fotoName;
-            }
+            $data->foto = $updateDataGuruRequest->file('foto') ? $newFoto : $data->foto;
 
             $data->save();
         } catch (\Exception $e) {
@@ -101,9 +107,10 @@ class DataGuruController extends BaseController
         try {
             $data = User::where('uuid', $params)->first();
 
-            // Hapus file terkait sebelum menghapus data dari database
-            if ($data->foto) {
-                Storage::disk('public')->delete('foto/' . $data->foto);
+            $oldFotoPath = public_path('foto/' . $data->foto);
+            // Hapus foto lama jika ada
+            if (File::exists($oldFotoPath)) {
+                File::delete($oldFotoPath);
             }
             $data->delete();
         } catch (\Exception $e) {
