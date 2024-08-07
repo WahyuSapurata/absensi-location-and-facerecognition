@@ -251,7 +251,7 @@
             render: function(data, type, row, meta) {
                 let result =
                     `
-                        <img src="{{ asset('absen/${row.foto}') }}" style="max-width: 100%;" alt="no foto">
+                        <img src="{{ asset('foto/${row.foto}') }}" style="max-width: 100%;" alt="no foto">
                     `;
                 return result;
             }

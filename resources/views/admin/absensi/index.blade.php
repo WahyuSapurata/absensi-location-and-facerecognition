@@ -106,7 +106,7 @@
             render: function(data, type, row, meta) {
                 let result =
                     `
-                        <img src="{{ asset('storage/absen/${row.foto_absen}') }}" style="max-width: 100%;" alt="no foto">
+                        <img src="{{ asset('absen/${row.foto_absen}') }}" style="max-width: 100%;" alt="no foto">
                     `;
                 return result;
             }
