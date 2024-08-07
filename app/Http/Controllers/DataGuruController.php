@@ -75,7 +75,7 @@ class DataGuruController extends BaseController
 
         $newFoto = '';
         if ($updateDataGuruRequest->file('foto')) {
-            $$extension = $updateDataGuruRequest->file('foto')->extension();
+            $extension = $updateDataGuruRequest->file('foto')->extension();
             $newFoto = $updateDataGuruRequest->name . '-' . now()->timestamp . '.' . $extension;
             $updateDataGuruRequest->file('foto')->storeAs('foto', $newFoto);
 
