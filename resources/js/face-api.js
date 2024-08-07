@@ -278,8 +278,8 @@ $(document).ready(async function () {
         formData.append('lokasi', locationText);
 
         // Validasi apakah lokasi berada dalam radius 500 meter
-        const targetLatitude = -5.19330324618496; // Ganti dengan nilai target latitude
-        const targetLongitude = 119.49931431589968; // Ganti dengan nilai target longitude
+        const targetLatitude = -5.129443349224177; // Ganti dengan nilai target latitude
+        const targetLongitude = 119.42974442311417; // Ganti dengan nilai target longitude
         const roundedTargetLatitude = targetLatitude.toFixed(5);
         const roundedTargetLongitude = targetLongitude.toFixed(5);
 
