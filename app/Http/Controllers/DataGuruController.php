@@ -75,9 +75,9 @@ class DataGuruController extends BaseController
 
         $newFoto = '';
         if ($updateDataGuruRequest->file('foto')) {
-            $$extension = $storeDataGuruRequest->file('foto')->extension();
-            $newFoto = $storeDataGuruRequest->name . '-' . now()->timestamp . '.' . $extension;
-            $storeDataGuruRequest->file('foto')->storeAs('foto', $newFoto);
+            $$extension = $updateDataGuruRequest->file('foto')->extension();
+            $newFoto = $updateDataGuruRequest->name . '-' . now()->timestamp . '.' . $extension;
+            $updateDataGuruRequest->file('foto')->storeAs('foto', $newFoto);
 
             // Hapus foto lama jika ada
             if (File::exists($oldFotoPath)) {
