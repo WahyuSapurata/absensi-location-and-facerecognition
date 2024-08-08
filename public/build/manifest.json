@@ -8,5 +8,10 @@
     "file": "assets/app-e576488e.js",
     "isEntry": true,
     "src": "resources/js/app.js"
+  },
+  "resources/js/face-api.js": {
+    "file": "assets/face-api-306c2e2b.js",
+    "isEntry": true,
+    "src": "resources/js/face-api.js"
   }
 }
