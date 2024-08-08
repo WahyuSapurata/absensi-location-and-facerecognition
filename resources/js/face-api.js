@@ -14,7 +14,7 @@ $(document).on('click', "#kirim", function (e) {
         'Absen',
         'POST', formData);
     // Menggunakan window.location.href untuk memindahkan ke URL yang ditentukan
-    // window.location.href = $(this).attr('data-url');
+    window.location.href = $(this).attr('data-url');
 });
 
 // $(document).ready(async function () {
@@ -275,10 +275,10 @@ $(document).ready(async function () {
         formData.append('lokasi', locationText);
 
         // Validasi apakah lokasi berada dalam radius 500 meter
-        // const targetLatitude = -5.129443349224177; // Ganti dengan nilai target latitude
-        // const targetLongitude = 119.42974442311417; // Ganti dengan nilai target longitude
-        const targetLatitude = -5.1511296; // Ganti dengan nilai target latitude
-        const targetLongitude = 119.4295296; // Ganti dengan nilai target longitude
+        const targetLatitude = -5.129443349224177; // Ganti dengan nilai target latitude
+        const targetLongitude = 119.42974442311417; // Ganti dengan nilai target longitude
+        // const targetLatitude = -5.1511296; // Ganti dengan nilai target latitude
+        // const targetLongitude = 119.4295296; // Ganti dengan nilai target longitude
         // -5.210197195030083, 119.50257905284002
         const roundedTargetLatitude = targetLatitude.toFixed(5);
         const roundedTargetLongitude = targetLongitude.toFixed(5);

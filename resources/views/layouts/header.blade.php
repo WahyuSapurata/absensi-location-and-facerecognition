@@ -22,13 +22,13 @@
             </div>
         </div>
         <!--end::Aside mobile toggle-->
-        <!--begin::Mobile logo-->
+        {{-- <!--begin::Mobile logo-->
         <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
             <a href="index.html" class="d-lg-none">
                 <img alt="Logo" src="admin/assets/media/logos/logo-3.svg" class="h-30px" />
             </a>
         </div>
-        <!--end::Mobile logo-->
+        <!--end::Mobile logo--> --}}
         <!--begin::Wrapper-->
         <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
             <!--begin::Navbar-->
@@ -103,7 +103,7 @@
                     <!--begin::User-->
                     <div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
                         <!--begin::Menu wrapper-->
-                        <span class="bg-primary"
+                        <span class="bg-primary d-sm-none"
                             style="width: 40px; height: 40px; position:relative; right:10px; border-radius: 5px; color: #FFFFFF; display: grid; justify-items: center; align-items: center; font-size: 14px; font-weight: 600">
                             @php
                                 $role = Auth::user()->role;
@@ -174,8 +174,8 @@
                                                 $user = $firstLetter . $secondLetter;
                                             @endphp
                                             @if (auth()->user()->foto)
-                                                <img src="{{ asset('/storage/foto/' . auth()->user()->foto) }}"
-                                                    alt="" style="max-width: 100%; border-radius: 5px;">
+                                                <img src="{{ asset('foto/' . auth()->user()->foto) }}" alt=""
+                                                    style="max-width: 100%; border-radius: 5px;">
                                             @else
                                                 {{ $user }}
                                             @endif
@@ -184,7 +184,8 @@
                                     <!--end::Avatar-->
                                     <!--begin::Username-->
                                     <div class="d-flex flex-column">
-                                        <div class="fw-bold d-flex align-items-center fs-5">{{ $username }}
+                                        <div class="fw-bold d-flex align-items-center fs-5">
+                                            {{ $username }}
                                             <div class="bg-primary rounded-circle p-1 ms-2 mb-2 bullet bullet-dot translate-middle animation-blink"
                                                 style=""></div>
                                         </div>
@@ -214,7 +215,7 @@
                         <!--end::Menu wrapper-->
                     </div>
                     <!--end::User -->
-                    <!--begin::Heaeder menu toggle-->
+                    {{-- <!--begin::Heaeder menu toggle-->
                     <div class="d-flex align-items-center d-lg-none ms-2 me-n3" title="Show header menu">
                         <div class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px"
                             id="kt_header_menu_mobile_toggle">
@@ -236,7 +237,7 @@
                             <!--end::Svg Icon-->
                         </div>
                     </div>
-                    <!--end::Heaeder menu toggle-->
+                    <!--end::Heaeder menu toggle--> --}}
                 </div>
                 <!--end::Toolbar wrapper-->
             </div>
