@@ -345,47 +345,47 @@
                     method: 'GET',
                 });
 
-                if (res_jamKerja.success === true) {
-                    // Lakukan sesuatu dengan data yang diterima
-                    res_jamKerja.data.forEach(key => {
-                        if (key.hari.toLowerCase() === namaHari.toLowerCase()) {
-                            const newJamMasuk = moment(key.jam_masuk, 'HH:mm').add(1,
-                                    'hours')
-                                .format(
-                                    'HH:mm');
-                            if (key.jam_masuk <= jamFormatted && jamFormatted <=
-                                newJamMasuk) {
-                                $('#absenMasuk').removeClass(
-                                    'disabled-link'); // Mengaktifkan tautan
-                            } else {
-                                $('#absenMasuk').addClass(
-                                    'disabled-link'); // Menonaktifkan tautan
-                            }
+                // if (res_jamKerja.success === true) {
+                //     // Lakukan sesuatu dengan data yang diterima
+                //     res_jamKerja.data.forEach(key => {
+                //         if (key.hari.toLowerCase() === namaHari.toLowerCase()) {
+                //             const newJamMasuk = moment(key.jam_masuk, 'HH:mm').add(1,
+                //                     'hours')
+                //                 .format(
+                //                     'HH:mm');
+                //             if (key.jam_masuk <= jamFormatted && jamFormatted <=
+                //                 newJamMasuk) {
+                //                 $('#absenMasuk').removeClass(
+                //                     'disabled-link'); // Mengaktifkan tautan
+                //             } else {
+                //                 $('#absenMasuk').addClass(
+                //                     'disabled-link'); // Menonaktifkan tautan
+                //             }
 
-                            const newJamPulang = moment(key.jam_pulang, 'HH:mm').add(1,
-                                    'hours')
-                                .format(
-                                    'HH:mm');
-                            if (key.jam_pulang <= jamFormatted && jamFormatted <=
-                                newJamPulang) {
-                                $('#absenPulang').removeClass(
-                                    'disabled-link'); // Mengaktifkan tautan
-                            } else {
-                                $('#absenPulang').addClass(
-                                    'disabled-link'); // Menonaktifkan tautan
-                            }
+                //             const newJamPulang = moment(key.jam_pulang, 'HH:mm').add(1,
+                //                     'hours')
+                //                 .format(
+                //                     'HH:mm');
+                //             if (key.jam_pulang <= jamFormatted && jamFormatted <=
+                //                 newJamPulang) {
+                //                 $('#absenPulang').removeClass(
+                //                     'disabled-link'); // Mengaktifkan tautan
+                //             } else {
+                //                 $('#absenPulang').addClass(
+                //                     'disabled-link'); // Menonaktifkan tautan
+                //             }
 
-                        } else {
-                            $('#absenMasuk').addClass(
-                                'disabled-link'); // Menonaktifkan tautan
-                            $('#absenPulang').addClass(
-                                'disabled-link'); // Menonaktifkan tautan
-                        }
-                    });
-                } else {
-                    console.error('Gagal mengambil data:', res.message);
-                    // Tampilkan pesan kesalahan atau lakukan sesuatu yang sesuai
-                }
+                //         } else {
+                //             $('#absenMasuk').addClass(
+                //                 'disabled-link'); // Menonaktifkan tautan
+                //             $('#absenPulang').addClass(
+                //                 'disabled-link'); // Menonaktifkan tautan
+                //         }
+                //     });
+                // } else {
+                //     console.error('Gagal mengambil data:', res.message);
+                //     // Tampilkan pesan kesalahan atau lakukan sesuatu yang sesuai
+                // }
 
                 if (res.success === true) {
                     // Lakukan sesuatu dengan data yang diterima

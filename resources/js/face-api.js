@@ -67,6 +67,7 @@ $(document).ready(async function () {
             // Pastikan model deteksi wajah dan landmark sudah dimuat
             await faceapi.nets.tinyFaceDetector.loadFromUri('/models');
             await faceapi.nets.faceLandmark68Net.loadFromUri('/models');
+            await faceapi.nets.faceRecognitionNet.loadFromUri('/models');
 
             const img = await faceapi.fetchImage(imageSrc);
 
@@ -207,7 +208,7 @@ $(document).ready(async function () {
 
             if (res.success === true) {
                 // Contoh menambahkan wajah pengguna yang sedang diotentikasi
-                addKnownFace(res.data.name, '/foto/' + res.data.foto);
+                await addKnownFace(res.data.name, '/foto/' + res.data.foto);
             } else {
                 console.error('Gagal mengambil data:', res.message);
             }
@@ -216,17 +217,13 @@ $(document).ready(async function () {
         }
 
         // Inisialisasi elemen-elemen ketika modal ditampilkan
-        initModalElements();
+        await initModalElements();
     });
-
 
     // Event yang dijalankan ketika modal disembunyikan
     $('#kt_modal_1').on('hide.bs.modal', function (e) {
         // Hentikan video ketika modal disembunyikan
-        if (video && video.srcObject) {
-            const tracks = video.srcObject.getTracks();
-            tracks.forEach(track => track.stop());
-        }
+        stopCamera();
     });
 
     $('#captureButton').on('click', captureImage);
@@ -278,8 +275,11 @@ $(document).ready(async function () {
         formData.append('lokasi', locationText);
 
         // Validasi apakah lokasi berada dalam radius 500 meter
-        const targetLatitude = -5.129443349224177; // Ganti dengan nilai target latitude
-        const targetLongitude = 119.42974442311417; // Ganti dengan nilai target longitude
+        // const targetLatitude = -5.129443349224177; // Ganti dengan nilai target latitude
+        // const targetLongitude = 119.42974442311417; // Ganti dengan nilai target longitude
+        const targetLatitude = -5.1511296; // Ganti dengan nilai target latitude
+        const targetLongitude = 119.4295296; // Ganti dengan nilai target longitude
+        // -5.210197195030083, 119.50257905284002
         const roundedTargetLatitude = targetLatitude.toFixed(5);
         const roundedTargetLongitude = targetLongitude.toFixed(5);
 

@@ -83,14 +83,28 @@ class AbsenController extends BaseController
 
     public function absensi(Request $request)
     {
-        $data = array();
-
         $newFoto = '';
         if ($request->file('foto_absen')) {
             $extension = $request->file('foto_absen')->extension();
             $newFoto = auth()->user()->name . '-' . now()->timestamp . '.' . $extension;
             $request->file('foto_absen')->storeAs('absen', $newFoto);
         }
+
+        $date = Carbon::now();
+        // Set lokasi menjadi Indonesia (ID)
+        $date->setLocale('id');
+        // Menggunakan metode isoFormat dengan format 'dddd'
+        $hari = $date->isoFormat('dddd');
+        $jam_kerja = JamKerja::where('hari', strtolower($hari))->first();
+
+        // Mendapatkan waktu kerja yang tepat
+        $waktuMasuk = Carbon::parse($jam_kerja->jam_masuk);
+        $waktuPulang = Carbon::parse($jam_kerja->jam_pulang);
+
+        $jamAbsenMasukAwal = $waktuMasuk;
+        $jamAbsenMasukAkhir = $waktuMasuk->copy()->addHour();
+        $jamAbsenPulangAwal = $waktuPulang;
+        $jamAbsenPulangAkhir = $waktuPulang->copy()->addHour();
 
         try {
             $data = new Absen();
@@ -99,7 +113,25 @@ class AbsenController extends BaseController
             $data->tanggal_absen = $request->tanggal_absen;
             $data->lokasi = $request->lokasi;
             $data->status = 'telah absen ' . $request->jenis_absen;
-            $data->jenis_absen = $request->jenis_absen;
+
+            $jamAbsen = Carbon::parse($request->jam_absen);
+
+            if ($request->jenis_absen == 'masuk') {
+                if ($jamAbsen->between($jamAbsenMasukAwal, $jamAbsenMasukAkhir)) {
+                    $data->jenis_absen = $request->jenis_absen;
+                } else {
+                    $data->jenis_absen = 'tidak ceklok masuk';
+                }
+            } elseif ($request->jenis_absen == 'pulang') {
+                if ($jamAbsen->between($jamAbsenPulangAwal, $jamAbsenPulangAkhir)) {
+                    $data->jenis_absen = $request->jenis_absen;
+                } else {
+                    $data->jenis_absen = 'tidak ceklok pulang';
+                }
+            } elseif ($request->jenis_absen == 'izin' || $request->jenis_absen == 'sakit') {
+                $data->jenis_absen = $request->jenis_absen;
+            }
+
             $data->ket = $request->ket;
             $data->foto_absen = $newFoto;
 
@@ -107,6 +139,7 @@ class AbsenController extends BaseController
         } catch (\Exception $e) {
             return $this->sendError($e->getMessage(), $e->getMessage(), 400);
         }
+
         return $this->sendResponse($data, 'Added data success');
     }
 }
