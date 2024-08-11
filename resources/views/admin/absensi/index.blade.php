@@ -111,15 +111,18 @@
                 return result;
             }
         }, {
-            data: 'status',
+            data: 'jenis_absen',
             className: 'text-center',
             render: function(data, type, row) {
                 // Periksa apakah jam_absen null atau tidak
-                if (row.status !== null) {
-                    return row.status;
-                } else {
-                    // Tampilkan garis mendatar atau elemen lain jika jam_absen null
-                    return '-'; // Anda dapat mengganti ini dengan elemen atau tata letak lainnya
+                if (data == 'masuk' || data == 'pulang') {
+                    return 'Hadir';
+                } else if (data == 'tidak ceklok masuk' || data == 'tidak ceklok pulang') {
+                    return 'Telat';
+                } else if (data == 'izin') {
+                    return 'Izin';
+                } else if (data == 'sakit') {
+                    return 'Sakit';
                 }
             }
         }, {
