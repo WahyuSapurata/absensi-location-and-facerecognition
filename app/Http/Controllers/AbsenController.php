@@ -142,4 +142,31 @@ class AbsenController extends BaseController
 
         return $this->sendResponse($data, 'Added data success');
     }
+
+    public function show($params)
+    {
+        $data = array();
+        try {
+            $data = Absen::where('uuid', $params)->first();
+        } catch (\Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getMessage(), 400);
+        }
+        return $this->sendResponse($data, 'Show data success');
+    }
+
+    public function update(Request $request, $params)
+    {
+        try {
+            $data = Absen::where('uuid', $params)->first();
+            $data->jam_absen = $request->jam_absen;
+            $data->tanggal_absen = $request->tanggal_absen;
+            $data->lokasi = $request->lokasi;
+            $data->status = $request->status;
+            $data->save();
+        } catch (\Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getMessage(), 400);
+        }
+
+        return $this->sendResponse($data, 'Update data success');
+    }
 }

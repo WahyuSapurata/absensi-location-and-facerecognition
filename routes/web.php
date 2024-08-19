@@ -42,6 +42,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/absensi', 'AbsenController@get_absensi')->name('absensi');
         Route::get('/absensi-data', 'AbsenController@getDataAbsen')->name('absensi-data');
 
+        Route::get('/show-absensi/{params}', 'AbsenController@show')->name('show-absensi');
+        Route::post('/update-absensi/{params}', 'AbsenController@update')->name('update-absensi');
+
         Route::get('/gaji', 'GajiController@index')->name('gaji');
         Route::get('/get-gaji', 'GajiController@get')->name('get-gaji');
         Route::post('/add-gaji', 'GajiController@store')->name('add-gaji');
