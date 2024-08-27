@@ -61,6 +61,38 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('/update-password/{params}', 'UbahPassword@update')->name('update-password');
     });
 
+    Route::group(['prefix' => 'kepsek', 'middleware' => ['auth'], 'as' => 'kepsek.'], function () {
+        Route::get('/dashboard-kepsek', 'Dashboard@dashboard_kepsek')->name('dashboard-kepsek');
+
+        Route::get('/dataguru', 'DataGuruController@index')->name('dataguru');
+        Route::get('/get-dataguru', 'DataGuruController@get')->name('get-dataguru');
+        Route::post('/add-dataguru', 'DataGuruController@store')->name('add-dataguru');
+        Route::get('/show-dataguru/{params}', 'DataGuruController@show')->name('show-dataguru');
+        Route::post('/update-dataguru/{params}', 'DataGuruController@update')->name('update-dataguru');
+        Route::delete('/delete-dataguru/{params}', 'DataGuruController@delete')->name('delete-dataguru');
+
+        Route::get('/jamkerja', 'JamKerjaController@index')->name('jamkerja');
+        Route::get('/get-jamkerja', 'JamKerjaController@get')->name('get-jamkerja');
+        Route::post('/add-jamkerja', 'JamKerjaController@store')->name('add-jamkerja');
+        Route::get('/show-jamkerja/{params}', 'JamKerjaController@show')->name('show-jamkerja');
+        Route::post('/update-jamkerja/{params}', 'JamKerjaController@update')->name('update-jamkerja');
+        Route::delete('/delete-jamkerja/{params}', 'JamKerjaController@delete')->name('delete-jamkerja');
+
+        Route::get('/absensi', 'AbsenController@get_absensi')->name('absensi');
+        Route::get('/absensi-data', 'AbsenController@getDataAbsen')->name('absensi-data');
+
+        Route::get('/show-absensi/{params}', 'AbsenController@show')->name('show-absensi');
+        Route::post('/update-absensi/{params}', 'AbsenController@update')->name('update-absensi');
+
+        Route::get('/rekap', 'Rekap@index')->name('rekap');
+        Route::get('/get-rekap/{params}', 'Rekap@get')->name('get-rekap');
+        Route::get('/export-excel/{params}', 'Rekap@exportToExcel')->name('export-excel');
+        Route::get('/export-pdf/{params}', 'Rekap@exportToPDF')->name('export-pdf');
+
+        Route::get('/ubahpassword', 'UbahPassword@index')->name('ubahpassword');
+        Route::post('/update-password/{params}', 'UbahPassword@update')->name('update-password');
+    });
+
     Route::group(['prefix' => 'guru', 'middleware' => ['auth'], 'as' => 'guru.'], function () {
         Route::get('/dashboard-guru', 'Dashboard@dashboard_guru')->name('dashboard-guru');
 

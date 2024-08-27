@@ -35,15 +35,27 @@ class DatabaseSeeder extends Seeder
                 'foto' => '',
             ]
         );
+        // User::updateOrCreate(
+        //     ['nip' => '0987654321'],
+        //     [
+        //         'uuid' => Uuid::uuid4()->toString(),
+        //         'name' => 'wahyu',
+        //         'email' => 'wahyu@gmail.com',
+        //         'password' => Hash::make('wahyu'),
+        //         'role' => 'guru',
+        //         'unit' => 'staf',
+        //         'foto' => '',
+        //     ]
+        // );
         User::updateOrCreate(
             ['nip' => '0987654321'],
             [
                 'uuid' => Uuid::uuid4()->toString(),
-                'name' => 'wahyu',
-                'email' => 'wahyu@gmail.com',
-                'password' => Hash::make('wahyu'),
-                'role' => 'guru',
-                'unit' => 'staf',
+                'name' => 'Kepala Sekolah',
+                'email' => 'kepsek@gmail.com',
+                'password' => Hash::make('kepsek'),
+                'role' => 'kepsek',
+                'unit' => 'kepsek',
                 'foto' => '',
             ]
         );

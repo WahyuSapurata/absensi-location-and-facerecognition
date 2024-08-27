@@ -5,6 +5,7 @@
     $dashboardRoutes = [
         'admin' => 'admin.dashboard-admin',
         'guru' => 'guru.dashboard-guru',
+        'kepsek' => 'kepsek.dashboard-kepsek',
     ];
 
     $isActive = in_array($role, array_keys($dashboardRoutes)) && $path[1] === 'dashboard-' . $role;
@@ -70,6 +71,42 @@
                 </div>
             @endif
 
+            @if ($role === 'kepsek')
+                <div class="menu-item">
+                    <a class="menu-link  {{ $path[1] === 'dataguru' ? 'active' : '' }}"
+                        href="{{ route('kepsek.dataguru') }}">
+                        <span class="menu-icon">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                            <span class="svg-icon svg-icon-2">
+                                <img src="{{ $path[1] === 'dataguru' ? url('admin/assets/media/icons/aside/dataguruact.svg') : url('/admin/assets/media/icons/aside/datagurudef.svg') }}"
+                                    alt="">
+                            </span>
+                            <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title"
+                            style="{{ $path[1] === 'dataguru' ? 'color: #F4BE2A' : 'color: #FFFFFF' }}">Data
+                            Pegawai</span>
+                    </a>
+                </div>
+
+                <div class="menu-item">
+                    <a class="menu-link  {{ $path[1] === 'jamkerja' ? 'active' : '' }}"
+                        href="{{ route('kepsek.jamkerja') }}">
+                        <span class="menu-icon">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                            <span class="svg-icon svg-icon-2">
+                                <img src="{{ $path[1] === 'jamkerja' ? url('admin/assets/media/icons/aside/jamkerjaact.svg') : url('/admin/assets/media/icons/aside/jamkerjadef.svg') }}"
+                                    alt="">
+                            </span>
+                            <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title"
+                            style="{{ $path[1] === 'jamkerja' ? 'color: #F4BE2A' : 'color: #FFFFFF' }}">Jam
+                            Kerja</span>
+                    </a>
+                </div>
+            @endif
+
             @if ($role === 'admin')
                 <div class="menu-item">
                     <a class="menu-link  {{ $path[1] === 'absensi' ? 'active' : '' }}"
@@ -84,6 +121,40 @@
                         </span>
                         <span class="menu-title"
                             style="{{ $path[1] === 'absensi' ? 'color: #F4BE2A' : 'color: #FFFFFF' }}">Absensi</span>
+                    </a>
+                </div>
+            @endif
+
+            @if ($role === 'kepsek')
+                <div class="menu-item">
+                    <a class="menu-link  {{ $path[1] === 'absensi' ? 'active' : '' }}"
+                        href="{{ route('kepsek.absensi') }}">
+                        <span class="menu-icon">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                            <span class="svg-icon svg-icon-2">
+                                <img src="{{ $path[1] === 'absensi' ? url('admin/assets/media/icons/aside/absenact.svg') : url('/admin/assets/media/icons/aside/absendef.svg') }}"
+                                    alt="">
+                            </span>
+                            <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title"
+                            style="{{ $path[1] === 'absensi' ? 'color: #F4BE2A' : 'color: #FFFFFF' }}">Absensi</span>
+                    </a>
+                </div>
+
+                <div class="menu-item">
+                    <a class="menu-link  {{ $path[1] === 'rekap' ? 'active' : '' }}"
+                        href="{{ route('kepsek.rekap') }}">
+                        <span class="menu-icon">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                            <span class="svg-icon svg-icon-2">
+                                <img src="{{ $path[1] === 'rekap' ? url('admin/assets/media/icons/aside/rekapact.svg') : url('/admin/assets/media/icons/aside/rekapdef.svg') }}"
+                                    alt="">
+                            </span>
+                            <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title"
+                            style="{{ $path[1] === 'rekap' ? 'color: #F4BE2A' : 'color: #FFFFFF' }}">Rekap</span>
                     </a>
                 </div>
             @endif
@@ -123,7 +194,8 @@
 
             @if ($role === 'guru')
                 <div class="menu-item">
-                    <a class="menu-link  {{ $path[1] === 'absen' ? 'active' : '' }}" href="{{ route('guru.absen') }}">
+                    <a class="menu-link  {{ $path[1] === 'absen' ? 'active' : '' }}"
+                        href="{{ route('guru.absen') }}">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
                             <span class="svg-icon svg-icon-2">

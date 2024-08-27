@@ -28,8 +28,10 @@ class Auth extends BaseController
     {
         if (auth()->user()->role === 'admin') {
             return redirect()->route('admin.dashboard-admin');
-        } else {
+        } elseif (auth()->user()->role === 'guru') {
             return redirect()->route('guru.dashboard-guru');
+        } elseif (auth()->user()->role === 'kepsek') {
+            return redirect()->route('kepsek.dashboard-kepsek');
         }
     }
 
