@@ -145,7 +145,7 @@ class Rekap extends BaseController
             $jumlahTidakCeklok = $tidakCeklokMasuk + $tidakCeklokPulang;
             $hasil = $jumlahTidakCeklok * 5000;
 
-            $user->gaji = $gaji->jumlah_gaji - $hasil;
+            $user->gaji = floatval($gaji->jumlah_gaji) - $hasil;
 
             return $user;
         });
