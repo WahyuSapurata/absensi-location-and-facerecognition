@@ -63,6 +63,7 @@ class Rekap extends BaseController
 
             return $user;
         });
+        dd($combinedData);
 
         return $this->sendResponse($combinedData, 'Get data success');
     }
