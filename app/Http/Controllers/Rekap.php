@@ -55,6 +55,7 @@ class Rekap extends BaseController
             $user->jumlahTidakCeklokPulang = $tidakCeklokPulang;
 
             $gaji = Gaji::where('uuid_user', $user->uuid)->first();
+            dd($gaji);
             $jumlahTidakCeklok = $tidakCeklokMasuk + $tidakCeklokPulang;
             $hasil = $jumlahTidakCeklok * 5000;
 
