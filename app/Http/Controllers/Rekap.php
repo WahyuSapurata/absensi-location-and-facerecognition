@@ -57,12 +57,12 @@ class Rekap extends BaseController
             $gaji = Gaji::where('uuid_user', $user->uuid)->first();
             $jumlahTidakCeklok = $tidakCeklokMasuk + $tidakCeklokPulang;
             $hasil = $jumlahTidakCeklok * 5000;
-            dd($hasil);
 
             $user->gaji = floatval($gaji->jumlah_gaji) - $hasil;
 
             return $user;
         });
+        dd($combinedData);
 
         return $this->sendResponse($combinedData, 'Get data success');
     }
