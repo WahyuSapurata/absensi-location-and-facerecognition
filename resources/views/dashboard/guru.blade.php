@@ -70,7 +70,8 @@
                                 </svg>
                                 <div>
                                     <div class="fs-6">Total Gaji</div>
-                                    <div class="fs-5" id="total-pengeluaran">{{ $total_gaji }}</div>
+                                    <div class="fs-5" id="total-pengeluaran">
+                                        {{ 'Rp ' . number_format($total_gaji, 0, ',', '.') }}</div>
                                 </div>
                             </div>
                         </div>
