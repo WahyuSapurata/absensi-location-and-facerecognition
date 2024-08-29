@@ -79,8 +79,8 @@
                                             <td>Hadir</td>
                                             <td>Sakit</td>
                                             <td>Izin</td>
-                                            <td>Tidak Ceklok Masuk</td>
-                                            <td>Tidak Ceklok Pulang</td>
+                                            <td>Telat Ceklok Masuk</td>
+                                            <td>Telat Ceklok Pulang</td>
                                         </tr>
                                     </thead>
                                     <tbody>
